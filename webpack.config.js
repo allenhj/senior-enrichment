@@ -1,9 +1,9 @@
 'use strict';
 
-const { resolve } = require('path')
+const { resolve } = require('path');
 
 module.exports = {
-  entry: './app/main',
+  entry: './app',
   output: {
     path: __dirname,
     filename: './public/bundle.js'

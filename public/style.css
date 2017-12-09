@@ -1,0 +1,488 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Karla', sans-serif;
+  margin: auto 0;
+}
+
+/* general */
+h1 {
+  color: rgb(70, 104, 242);
+  font-family: 'Karla', sans-serif;
+  margin: auto 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: rgb(70, 104, 242);
+}
+
+h3 {
+  font-size: 1.5em;
+  font-weight: 300;
+  color: black;
+}
+
+h4 {
+  font-weight: 700;
+  color: rgb(70, 104, 242);
+}
+
+h5 {
+  font-size: 1em;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+}
+
+h6 {
+  font-size: 0.8em;
+  font-weight: 300;
+  color: black;
+}
+
+a {
+  color: rgb(70, 104, 242);
+  text-decoration: none;
+}
+a:visited{
+  color: rgb(70, 104, 242);
+}
+#plus {
+  font-size: 1.4em;
+}
+
+label {
+  /* not working */
+  text-align: left;
+}
+
+input {
+  width: 100%;
+}
+
+select {
+  overflow: auto;
+  width: 100%;
+}
+
+/* navbar */
+header {
+  display: flex;
+  /* position: fixed; */
+  height: 10vh;
+  background-color: rgb(70, 104, 242);
+}
+
+header nav {
+  display: flex;
+}
+
+#title {
+  flex-grow: 1;
+  margin-left: 1em;
+  font-size: 2em;
+  font-weight: 700;
+  color: #fff;
+}
+
+.nav-item {
+  margin-right: 1em;
+}
+
+.nav-item a {
+  padding: 0 1em 0 1em;
+  font-size: 1.3em;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 10vh;
+  color: #fff;
+  transition: opacity 0.25s ease;
+}
+
+.nav-item a:hover {
+  opacity: 0.5;
+}
+
+/* CampusesList component */
+#campuses-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5em;
+  text-align: center;
+  justify-content: center;
+}
+
+.campus {
+  flex: 0 0 25%;
+  text-align: center;
+  margin: 1em;
+  align-self: center;
+}
+
+.card {
+  margin-top: -55px;
+  padding: 1.5em 2em;
+  height: 12em;
+  background-color: white;
+  border-radius: 1em;
+  z-index: -100000;
+  box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+  box-shadow: 0 0 30px 6px rgba(31,51,73,.2);
+}
+
+.campus-name {
+  padding: 3em 0em 1em 0em;
+}
+
+
+#students {
+  display: flex;
+}
+
+#add-student {
+  margin: 2em;
+  padding: 1.5em 2em;
+  height: 40vh;
+  width: 20vw;
+  text-align: center;
+  background-color: white;
+  border-radius: 1em;
+  box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
+}
+
+#students-table {
+  flex-grow: 1;
+  margin: 2em 0 2em 2em;
+  padding: 4em;
+  width: 70vw;
+  height: 83.5vh;
+  border-radius: 1em;
+  box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
+}
+
+#students-header {
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.header-cell {
+  display: flex;
+  flex-basis: 1em;
+  margin-right: 0.2em;
+}
+
+.student-id {
+  flex-grow: 1;
+}
+
+.student-name {
+  flex-grow: 5;
+}
+
+.student-campus {
+  flex-grow: 3;
+}
+
+.student-remove {
+  flex-grow: 1;
+}
+
+.header-cell h3 {
+  margin-right: 0.25em;
+}
+
+.inactive {
+  opacity: 0;
+}
+
+.active {
+  opacity: 1;
+  color: rgb(70, 104, 242);
+}
+
+.student-row {
+  display: flex;
+}
+
+.student-row div {
+  display: flex;
+  flex-basis: 1em;
+  margin-right: 0.1em;
+}
+
+#add-form #input-group {
+  margin: 1em 0;
+}
+
+/* single campus view */
+#campus-detail-container {
+  display: flex;
+  margin-top: 5em;
+  text-align: center;
+  justify-content: center;
+}
+
+#hero {
+  margin: 5em 0 0 13em;
+}
+
+#campus-detail-card {
+  display: flex;
+  text-align: center;
+  margin-top: -22em;
+  padding: 6em;
+  width: 70vw;
+  height: 70vh;
+  border-radius: 1em;
+  box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
+  background-color: white;
+}
+
+#information {
+  display:flex;
+  flex-direction: column;
+  margin: -0em -4em -4em 15em;
+  text-align: left;
+  /* background-color: mediumpurple; */
+}
+
+#campus-details {
+  margin: 0 4em 4em 0;
+}
+
+#spacer {
+  flex-grow: 1;
+}
+
+#delete-campus {
+  align-self: flex-end;
+}
+
+#delete-campus div {
+  margin-left: 1em;
+}
+
+.btn {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 3em;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 1);
+  transition: color 0.25s ease;
+}
+
+.btn:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.delete-btn {
+  background-color: rgb(231, 78, 71);
+}
+
+.edit-btn {
+  background-color: rgb(92, 194, 112);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* spinning planets */
+/* adapted fromt the work of Kushagra Gour: https://codepen.io/chinchang/pen/ygHBc */
+.earth {
+  display:inline-block;
+  background-image: url('imgs/earth.jpg');
+  width: 90px;
+  height: 90px;
+  /* a black shadow from left and white from right */
+  box-shadow: inset 16px 0 40px 3px rgba(0,0,0,0.9),
+    inset -3px 0 5px 2px rgba(255,255,255,0.16);
+  background-size: 190px;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  }
+
+.mars {
+  display:inline-block;
+  background-image: url('imgs/mars.jpg');
+  width: 90px;
+  height: 90px;
+  box-shadow: inset 16px 0 40px 3px rgba(0,0,0,0.9),
+    inset -3px 0 5px 2px rgba(255,255,255,0.16);
+  background-size: 190px;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
+.moon {
+  display:inline-block;
+  background-image: url('imgs/moon.jpg');
+  width: 90px;
+  height: 90px;
+  box-shadow: inset 16px 0 40px 3px rgba(0,0,0,0.9),
+    inset -3px 0 5px 2px rgba(255,255,255,0.16);
+  background-size: 190px;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.pluto {
+  display:inline-block;
+  background-image: url('imgs/pluto.png');
+  width: 90px;
+  height: 90px;
+  box-shadow: inset 16px 0 40px 3px rgba(0,0,0,0.9),
+    inset -3px 0 5px 2px rgba(255,255,255,0.16);
+  background-size: 190px;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  }
+
+  /* big version */
+.earth-big {
+  position:relative;
+  z-index:1000000;
+  background-image: url('imgs/earth.jpg');
+  width: 280px;
+  height: 280px;
+  /* a black shadow from left and white from right */
+  box-shadow: inset 42px 0 80px 6px rgba(0,0,0,0.9),
+    inset -3px 0 5px 2px rgba(255,255,255,0.26);
+  background-size: 560px;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.mars-big {
+  position:relative;
+  z-index:1000000;
+  background-image: url('imgs/mars.jpg');
+  width: 280px;
+  height: 280px;
+  /* a black shadow from left and white from right */
+  box-shadow: inset 42px 0 80px 6px rgba(0,0,0,0.9),
+  inset -3px 0 5px 2px rgba(255,255,255,0.26);
+  background-size: 560px;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.pluto-big {
+  position:relative;
+  z-index:1000000;
+  background-image: url('imgs/pluto.png');
+  width: 280px;
+  height: 280px;
+  /* a black shadow from left and white from right */
+  box-shadow: inset 42px 0 80px 6px rgba(0,0,0,0.9),
+  inset -3px 0 5px 2px rgba(255,255,255,0.26);
+  background-size: 560px;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.moon-big {
+  position:relative;
+  z-index:1000000;
+  background-image: url('imgs/moon.jpg');
+  width: 280px;
+  height: 280px;
+  /* a black shadow from left and white from right */
+  box-shadow: inset 42px 0 80px 6px rgba(0,0,0,0.9),
+  inset -3px 0 5px 2px rgba(255,255,255,0.26);
+  background-size: 560px;
+  border-radius: 50%;
+  animation-name: rotate;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+  /* small icons  */
+.earth-small {
+  flex-basis: 0;
+  background-image: url('imgs/earth.jpg');
+  width: 15px;
+  height: 15px;
+  /* box-shadow: inset 16px 0 40px 3px rgba(0,0,0,0.9),
+     inset -3px 0 5px 2px rgba(255,255,255,0.16); */
+  background-size: 40px;
+  border-radius: 50%;
+}
+
+.mars-small {
+  flex-basis: 0;
+  background-image: url('imgs/mars.jpg');
+  width: 15px;
+  height: 15px;
+  /* box-shadow: inset 16px 0 40px 3px rgba(0,0,0,0.9),
+     inset -3px 0 5px 2px rgba(255,255,255,0.16); */
+  background-size: 40px;
+  border-radius: 50%;
+}
+
+.moon-small {
+  display:inline-block;
+  background-image: url('imgs/moon.jpg');
+   width: 15px;
+   height: 15px;
+   /* box-shadow: inset 16px 0 40px 3px rgba(0,0,0,0.9),
+     inset -3px 0 5px 2px rgba(255,255,255,0.16); */
+   background-size: 40px;
+   border-radius: 50%;
+}
+
+.pluto-small {
+  display:inline-block;
+  background-image: url('imgs/pluto.png');
+   width: 15px;
+   height: 15px;
+   /* box-shadow: inset 16px 0 40px 3px rgba(0,0,0,0.9),
+     inset -3px 0 5px 2px rgba(255,255,255,0.16); */
+   background-size: 40px;
+   border-radius: 50%;
+}
+
+@keyframes rotate {
+  0% { background-position: 0px; }
+  100% { background-position: 190px; }
+}

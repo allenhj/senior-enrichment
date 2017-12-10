@@ -7,9 +7,10 @@ import { removeStudent } from '../reducers/studentsReducer';
 const StudentRow = props => {
   const student = props.student;
   const studentCampus = props.campuses.find(campus => campus.id === student.campusId);
-  // console.log(studentCampus);
+
   return (
-    <div className="student-row">
+    <div>
+    {studentCampus && <div className="student-row">
       <div className="student-id">{student.id}</div>
       <div className="student-name">
         <h5>
@@ -17,7 +18,7 @@ const StudentRow = props => {
         </h5>
       </div>
       {!props.isCampusView && <div className="student-campus">
-        <div className={`${studentCampus.name.toLowerCase()}-small`} />
+        <div className={`${studentCampus.className.toLowerCase()}-small`} />
         <h5 style={{flexGrow: '1', marginLeft: '1em'}}>
           <Link to={`/campuses/${studentCampus.id}`}>{studentCampus.name}</Link>
         </h5>
@@ -28,6 +29,7 @@ const StudentRow = props => {
         >
         Remove
       </div>}
+    </div>}
     </div>
   );
 };
@@ -41,8 +43,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleClick: () => {
-      console.log(ownProps);
-      dispatch(removeStudent(ownProps.student));
+      dispatch(removeStudent(ownProps.student.id));
     }
   };
 };

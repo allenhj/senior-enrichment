@@ -60,9 +60,128 @@ input {
   width: 100%;
 }
 
+textarea {
+  width: 100%;
+}
+
 select {
   overflow: auto;
   width: 100%;
+}
+
+/* buttons */
+.btn {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 3em;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 1);
+  transition: color 0.25s ease;
+}
+
+.btn:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.delete-btn {
+  background-color: rgb(231, 78, 71);
+}
+
+.edit-btn {
+  background-color: rgb(92, 194, 112);
+}
+
+.add-btn {
+  display:inline-block;
+  background-color: rgb(70, 104, 242);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+/* modal adapted from https://www.w3schools.com/howto/howto_css_modals.asp*/
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  margin: 15em auto;
+  text-align: left;
+  padding: 4em 2em 2em 4em;
+  width: 50vw;
+  height: 50vh;
+  border-radius: 1em;
+  box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
+  background-color: white;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* adapted from https://jsfiddle.net/robi_osahan/gwgL7Loj/ by robi_osahan */
+.plus-button {
+  position: relative;
+  background-color: #4668f2;
+  font-size: 45px;
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.plus-button:after, .plus-button:before {
+  content: "";
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.25s ease;
+}
+.plus-button:before {
+  height: 1em;
+  width: 0.2em;
+}
+.plus-button:after {
+  height: 0.2em;
+  width: 1em;
+}
+.plus-button:hover:before {
+  background-color: rgba(164, 181, 244, 1);
+}
+.plus-button:hover:after {
+  background-color: rgba(164, 181, 244, 1);
 }
 
 /* navbar */
@@ -138,7 +257,15 @@ header nav {
   padding: 3em 0em 1em 0em;
 }
 
+#floating-plus-button {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  z-index: 999;
+}
 
+
+/* StudentsList component */
 #students {
   display: flex;
 }
@@ -146,19 +273,21 @@ header nav {
 #add-student {
   margin: 2em;
   padding: 1.5em 2em;
-  height: 40vh;
-  width: 20vw;
+  height: 10vh;
+  width: 30vw;
   text-align: center;
   background-color: white;
   border-radius: 1em;
   box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
+  transition: all 0.25s ease;
 }
+
 
 #students-table {
   flex-grow: 1;
   margin: 2em 0 2em 2em;
   padding: 4em;
-  width: 70vw;
+  width: 60vw;
   height: 83.5vh;
   border-radius: 1em;
   box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
@@ -214,7 +343,7 @@ header nav {
   margin-right: 0.1em;
 }
 
-#add-form #input-group {
+#add-student-form #input-group {
   margin: 1em 0;
 }
 
@@ -246,6 +375,7 @@ header nav {
   display:flex;
   flex-direction: column;
   margin: -0em -4em -4em 15em;
+  width: 100%;
   text-align: left;
   /* background-color: mediumpurple; */
 }
@@ -254,43 +384,50 @@ header nav {
   margin: 0 4em 4em 0;
 }
 
-#spacer {
+.spacer {
   flex-grow: 1;
 }
 
-#delete-campus {
+#modify-data {
   align-self: flex-end;
 }
 
-#delete-campus div {
+#modify-data div {
   margin-left: 1em;
 }
 
-.btn {
-  display: inline-block;
+/* student detail */
+#student-detail-container {
+  display: flex;
+  margin-top: 5em;
   text-align: center;
-  vertical-align: middle;
-  line-height: 3em;
-  width: 3em;
-  height: 3em;
-  border-radius: 50%;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 1);
-  transition: color 0.25s ease;
+  justify-content: center;
 }
 
-.btn:hover {
-  color: rgba(255, 255, 255, 0.5);
+#student-detail-card {
+  margin-top:.5em;
+  display: flex;
+  text-align: center;
+  padding: 6em 2em 2em 6em;
+  width: 70vw;
+  height: 70vh;
+  border-radius: 1em;
+  box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
+  background-color: white;
 }
 
-.delete-btn {
-  background-color: rgb(231, 78, 71);
+#student-information {
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  text-align: left;
+  /* background-color: mediumpurple; */
 }
 
-.edit-btn {
-  background-color: rgb(92, 194, 112);
+#student-details {
+  margin-bottom: 3em;
 }
-
 
 
 
@@ -322,7 +459,7 @@ header nav {
   animation-duration: 8s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  }
+}
 
 .mars {
   display:inline-block;

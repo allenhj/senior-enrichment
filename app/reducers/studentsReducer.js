@@ -21,6 +21,13 @@ const addStudent = student => {
   };
 };
 
+const editStudent = student => {
+  return {
+    type: EDIT_STUDENT,
+    student
+  };
+};
+
 const deleteStudent = studentId => {
   console.log('deleted student');
   return {
@@ -29,7 +36,7 @@ const deleteStudent = studentId => {
   };
 };
 
-// fetch from server
+// Fetch from server
 export const fetchStudents = () => {
   return dispatch => {
     axios.get('/api/students')
@@ -39,7 +46,7 @@ export const fetchStudents = () => {
   };
 };
 
-// post new student data to server
+// Add a student
 export const postStudent = student => {
   return dispatch => {
     axios.post('/api/students', student)
@@ -49,26 +56,36 @@ export const postStudent = student => {
   };
 };
 
-// delete student
-export const removeStudent = student => {
-  console.log('studentToDelete', student);
+// Update student
+export const updateStudent = student => {
   return dispatch => {
-    axios.delete(`/api/students/${student.id}`)
+    axios.put( `/api/students/${student.id}`, student)
       .then(res => res.data)
-      .then(() => dispatch(deleteStudent(student.id)))
+      .then(editedStudent => dispatch(editStudent(editedStudent)))
+      .catch(console.error);
+  };
+};
+
+// Delete student
+export const removeStudent = studentId => {
+  console.log('studentToDelete', studentId);
+  return dispatch => {
+    axios.delete(`/api/students/${studentId}`)
+      .then(res => res.data)
+      .then(() => dispatch(deleteStudent(+studentId)))
       .catch(console.error);
   };
 };
 
 // reducer
 const studentsReducer = (state = [], action) => {
-  // console.log('actionstudent', action.student);
-  // console.log('poststate', state.filter(student => student.id !== action.student.id));
   switch (action.type) {
     case GET_STUDENTS:
       return action.students;
     case ADD_STUDENT:
       return [...state, action.student];
+    case EDIT_STUDENT:
+      return [...state.filter(student => student.id !== action.student.id), action.student];
     case DELETE_STUDENT:
       return state.filter(student => student.id !== action.studentId);
     default:

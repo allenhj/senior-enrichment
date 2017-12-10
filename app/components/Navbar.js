@@ -10,13 +10,10 @@ const Navbar = (props) => {
         Interplanetary Campus Manager
       </div>
       <nav>
-        {path[1] !== 'campuses' && <div className="nav-item">
+        {(path.length > 2 || path[1] === 'students') && <div className="nav-item">
           <Link to="/">Campuses</Link>
         </div>}
-        {path.length > 2 && <div className="nav-item">
-          <Link to="/">Campuses</Link>
-        </div>}
-        {path[1] !== 'students' && <div className="nav-item">
+        {(path.length > 2 || path[1] !== 'students') && <div className="nav-item">
           <Link to="students" onClick={() => props.history.push('/students')}>Students</Link>
         </div>}
       </nav>

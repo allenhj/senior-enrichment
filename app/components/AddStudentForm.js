@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { postStudent } from '../reducers/studentsReducer';
+import { postStudent, updateStudent } from '../reducers/studentsReducer';
+import { editingStudent } from '../reducers/editingStudentReducer';
 
 const AddStudentForm = props => {
   const campuses = props.campuses;
+
   return (
-    <div id="add-student">
-    <h2><span id="plus">+</span> Add Student</h2>
+    <div>
     <div id="add-form-container">
-      <form id="add-form" onSubmit={props.handleSubmit}>
+      <form id="add-student-form" onSubmit={props.handleSubmit}>
         <div id="input-group">
           <div>
             <label htmlFor="firstName">First Name</label>
@@ -16,7 +17,8 @@ const AddStudentForm = props => {
               id="firstName"
               type="text"
               name="firstName"
-              placeholder="First Name"
+              defaultValue = {props.student && props.student.firstName || ''}
+              placeholder = {props.student && props.student.firstName || 'First Name'}
             />
           </div>
           <div>
@@ -25,7 +27,8 @@ const AddStudentForm = props => {
               id="lastName"
               type="text"
               name="lastName"
-              placeholder="Last Name"
+              defaultValue = {props.student && props.student.lastName || ''}
+              placeholder = {props.student && props.student.lastName || 'Last Name'}
             />
           </div>
           <div>
@@ -34,7 +37,8 @@ const AddStudentForm = props => {
               id="email"
               type="text"
               name="email"
-              placeholder="Email"
+              defaultValue = {props.student && props.student.email || ''}
+              placeholder = {props.student && props.student.email || 'Email'}
             />
           </div>
           <div>
@@ -43,11 +47,25 @@ const AddStudentForm = props => {
             id="gpa"
             type="text"
             name="gpa"
-            placeholder="GPA"
+            defaultValue = {props.student && props.student.gpa || ''}
+            placeholder = {props.student && props.student.gpa || 'GPA'}
           />
         </div>
           <div>
             <label htmlFor="campusId">Campus</label>
+            {props.student ?
+            <select
+              id="campusId"
+              name="campusId"
+              defaultValue={props.student.campusId}
+            >
+              {campuses.map(campus => {
+                return (
+                  <option key={campus.id} value={campus.id}>{campus.name}</option>
+                );
+              })}
+            </select>
+            :
             <select
               id="campusId"
               name="campusId"
@@ -58,11 +76,19 @@ const AddStudentForm = props => {
                 );
               })}
             </select>
+            }
           </div>
         </div>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
+        {!props.student ?
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+          :
+          <div>
+            <button type="submit">Save</button>
+            <button onClick={props.cancelEditing}>Cancel</button>
+          </div>
+        }
       </form>
     </div>
   </div>
@@ -75,7 +101,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleSubmit: (event) => {
       console.dir(event.target);
@@ -85,20 +111,28 @@ const mapDispatchToProps = dispatch => {
       const email = event.target.email.value;
       const gpa = event.target.gpa.value;
       const campusId = event.target.campusId.value;
-      console.log('formvals', {
-        firstName,
-        lastName,
-        email,
-        campusId,
-        gpa
-      });
-      dispatch(postStudent({
-        firstName,
-        lastName,
-        email,
-        gpa,
-        campusId
-      }));
+      if (!ownProps.student) {
+        dispatch(postStudent({
+          firstName,
+          lastName,
+          email,
+          gpa,
+          campusId
+        }));
+      } else if (ownProps.student.id) {
+        dispatch(updateStudent({
+          id: ownProps.student.id,
+          firstName,
+          lastName,
+          email,
+          gpa,
+          campusId
+        }));
+        dispatch(editingStudent(false));
+      }
+    },
+    cancelEditing: () => {
+      dispatch(editingStudent(false));
     }
   };
 };

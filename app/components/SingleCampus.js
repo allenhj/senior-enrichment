@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 
 import StudentsTableHeader from './StudentsTableHeader';
 import StudentRow from './StudentRow';
+import AddCampusForm from './AddCampusForm';
 
-import { updateCampus, removeCampus } from '../reducers/campusesReducer';
+import { removeCampus } from '../reducers/campusesReducer';
+import { editingCampus } from '../reducers/editingCampusReducer';
 
 const SingleCampus = props => {
   const campus = props.campuses.find(campus => campus.id === +props.location.pathname.split('/').slice(-1));
 
+  console.log('SINGLECAMPUSPROPS', props);
   return (
     <div>
       {props.campuses.length && (<div>
@@ -17,6 +20,7 @@ const SingleCampus = props => {
       </div>
       <div id="campus-detail-container">
         <div id="campus-detail-card">
+          {!props.isEditingCampus ?
           <div id="information">
             <div id="campus-details">
               <h1> {campus.name} </h1>
@@ -31,8 +35,8 @@ const SingleCampus = props => {
                 );
               })}
             </div>
-            <div id="spacer" />
-            <div id="delete-campus">
+            <div className="spacer" />
+            <div id="modify-data">
               <div
                 className="edit-btn btn"
                 onClick={props.onEditClick}
@@ -43,6 +47,10 @@ const SingleCampus = props => {
               >X</div>
             </div>
           </div>
+          :
+          <div id="information">
+            <h5><AddCampusForm campus={campus} campuses={props.campuses} /></h5>
+          </div>}
         </div>
       </div>
     </div>)}
@@ -53,20 +61,18 @@ const SingleCampus = props => {
 const mapStateToProps = state => {
   return {
     campuses: state.campuses,
-    students: state.students
+    students: state.students,
+    isEditingCampus: state.isEditingCampus
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log('ownprops', ownProps);
   return {
-    onEditClick: (event) => {
-      console.log(event.target.value);
-      dispatch(updateCampus(event.target.value));
+    onEditClick: () => {
+      dispatch(editingCampus(true));
     },
     onDeleteClick: () => {
       const id = ownProps.location.pathname.split('/')[2];
-      console.log(id);
       dispatch(removeCampus(id));
       ownProps.history.push('/campuses');
     }

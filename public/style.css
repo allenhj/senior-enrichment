@@ -51,22 +51,65 @@ a:visited{
   font-size: 1.4em;
 }
 
+#campus-input-group {
+  margin: 1em 0;
+}
+
+#student-input-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#campus-input-group div, #student-input-group div {
+  display:flex;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
 label {
-  /* not working */
+  flex-basis: 8em;
   text-align: left;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: rgb(70, 104, 242);
+}
+
+label[for=description] {
+  height: 5.5em;
 }
 
 input {
-  width: 100%;
+ flex-grow:1;
+ background: transparent;
+ border: none;
+ border-bottom: 0.1em dashed rgb(70, 104, 242);
+ width: 275px;
+ outline: none;
+ padding-left: 0.65em;
+ font-size: 1.5em;
 }
 
 textarea {
-  width: 100%;
+  flex-grow:1;
+  height: 10em;
+  background: transparent;
+  border-radius: 0.5em;
+  border: 0.1em solid rgb(70, 104, 242);
+  font-size: 1em;
+  padding: 1em;
 }
 
 select {
-  overflow: auto;
-  width: 100%;
+  flex-grow: 1;
+  padding-left:1.5em;
+  background: transparent;
+  border-radius: 0.25em;
+  border: 0.1em solid rgb(70, 104, 242);
+  font-size: 1.5em;
+}
+
+#student-input-group select {
+  margin-left: -0.85em;
 }
 
 /* buttons */
@@ -103,50 +146,25 @@ select {
   border-radius: 50%;
 }
 
-/* modal adapted from https://www.w3schools.com/howto/howto_css_modals.asp*/
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  -webkit-backdrop-filter: blur(6px);
-  transition: all 0.25s ease;
-}
-
-/* Modal Content/Box */
-.modal-content {
+.submit-button-container {
+  align-self: flex-end;
   display: flex;
-  flex-direction: column;
-  margin: 15em auto;
-  text-align: left;
-  padding: 4em 2em 2em 4em;
-  width: 50vw;
-  height: 50vh;
-  border-radius: 1em;
-  box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
-  background-color: white;
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+button[type=submit] {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  color: #fff;
+  border: none;
+  background-color: rgb(92, 194, 112);
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.cancel-btn {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  color: #fff;
+  border: none;
+  background-color: rgb(231, 78, 71);
 }
 
 /* adapted from https://jsfiddle.net/robi_osahan/gwgL7Loj/ by robi_osahan */
@@ -184,10 +202,40 @@ select {
   background-color: rgba(164, 181, 244, 1);
 }
 
+/* modal adapted from https://www.w3schools.com/howto/howto_css_modals.asp*/
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  margin: 15em auto;
+  text-align: left;
+  padding: 4em 2em 2em 4em;
+  width: 50vw;
+  height: 50vh;
+  border-radius: 1em;
+  box-shadow: 0 0 30px 6px rgba(31,51,73,.1);
+  background-color: white;
+}
+
 /* navbar */
 header {
   display: flex;
-  /* position: fixed; */
   height: 10vh;
   background-color: rgb(70, 104, 242);
 }
@@ -250,6 +298,7 @@ header nav {
 }
 
 .card:hover {
+  margin-top: -60px;
   box-shadow: 0 0 30px 6px rgba(31,51,73,.2);
 }
 
@@ -282,6 +331,9 @@ header nav {
   transition: all 0.25s ease;
 }
 
+#add-student-container {
+  margin-top: 2em;
+}
 
 #students-table {
   flex-grow: 1;
@@ -345,6 +397,7 @@ header nav {
 
 #add-student-form #input-group {
   margin: 1em 0;
+  display: flex;
 }
 
 /* single campus view */
@@ -428,14 +481,6 @@ header nav {
 #student-details {
   margin-bottom: 3em;
 }
-
-
-
-
-
-
-
-
 
 
 

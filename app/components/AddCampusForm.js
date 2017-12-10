@@ -16,63 +16,73 @@ const AddStudentForm = props => {
   return (
     <div id="add-campus">
       <form id="add-campus-form" onSubmit={props.handleSubmit}>
-        <div id="input-group">
+        <div id="campus-input-group">
           <div>
-            <label htmlFor="Name">Name</label>
+            <label htmlFor="name">Name</label>
             <input
               id="name"
               type="text"
               name="name"
-              defaultValue={props.campus && props.campus.name || 'Name'}
+              defaultValue={props.campus && props.campus.name || ''}
               placeholder={props.campus && props.campus.name || 'Name'}
             />
           </div>
           <div>
-          <label htmlFor="className">Site</label>
-          {campusClassName ?
-          <select
-            id="className"
-            name="className"
-            defaultValue={campusClassName}
-          >
-            {sites.map(site => {
-              return (
-                <option key={site} value={site}>{site.charAt(0).toUpperCase() + site.slice(1)}</option>
-              );
-            })}
-          </select>
-          :
-          <select
-            id="className"
-            name="className"
-          >
-            {sites.map(site => {
-              return (
-                <option key={site} value={site}>{site.charAt(0).toUpperCase() + site.slice(1)}</option>
-              );
-            })}
-          </select> }
+            <label htmlFor="className">Site</label>
+            {campusClassName ?
+            <select
+              id="className"
+              name="className"
+              defaultValue={campusClassName}
+            >
+              {sites.map(site => {
+                return (
+                  <option key={site} value={site}>{site.charAt(0).toUpperCase() + site.slice(1)}</option>
+                );
+              })}
+            </select>
+            :
+            <select
+              id="className"
+              name="className"
+            >
+              {sites.map(site => {
+                return (
+                  <option key={site} value={site}>&nbsp;{site.charAt(0).toUpperCase() + site.slice(1)}</option>
+                );
+              })}
+            </select> }
+          </div>
           <div>
             <label htmlFor="description">Description</label>
             <textarea
               id="description"
               type="textarea"
               name="description"
-              defaultValue={props.campus && props.campus.description || 'Description'}
+              defaultValue={props.campus && props.campus.description || ''}
               placeholder={props.campus && props.campus.description || 'Description'}
             />
           </div>
-        </div>
-        {!props.campus ?
-          <div>
+          {!props.campus ?
+          <div className="submit-button-container">
             <button type="submit">Submit</button>
+            <div className="spacer" />
+            <button
+              onClick={() => {}}
+              type="button"
+              className="cancel-btn"
+            >Cancel</button>
           </div>
           :
-          <div>
+          <div className="submit-button-container">
             <button type="submit">Save</button>
-            <button onClick={props.cancelEditing}>Cancel</button>
+            <div className="spacer" />
+            <button
+              onClick={props.cancelEditing}
+              className="cancel-btn"
+            >Cancel</button>
           </div>
-        }
+          }
         </div>
       </form>
     </div>

@@ -3,14 +3,25 @@ import { connect } from 'react-redux';
 import { postStudent, updateStudent } from '../reducers/studentsReducer';
 import { editingStudent } from '../reducers/editingStudentReducer';
 
+// helper function to close addStudent dropdown
+const closeAddStudentForm = () => {
+  const addStudentEl = document.getElementById('add-student');
+  const clickedEl = document.getElementById('add-student-clicked');
+  clickedEl.style.display = 'none';
+  window.setTimeout(() => {
+    addStudentEl.style.height = '10vh';
+  }, 100);
+  document.getElementById('add-student-form').reset();
+};
+
 const AddStudentForm = props => {
   const campuses = props.campuses;
 
   return (
-    <div>
+    <div id="add-student-container">
     <div id="add-form-container">
       <form id="add-student-form" onSubmit={props.handleSubmit}>
-        <div id="input-group">
+        <div id="student-input-group">
           <div>
             <label htmlFor="firstName">First Name</label>
             <input
@@ -42,15 +53,15 @@ const AddStudentForm = props => {
             />
           </div>
           <div>
-          <label htmlFor="gpa">GPA</label>
-          <input
-            id="gpa"
-            type="text"
-            name="gpa"
-            defaultValue = {props.student && props.student.gpa || ''}
-            placeholder = {props.student && props.student.gpa || 'GPA'}
-          />
-        </div>
+            <label htmlFor="gpa">GPA</label>
+            <input
+              id="gpa"
+              type="text"
+              name="gpa"
+              defaultValue = {props.student && props.student.gpa || ''}
+              placeholder = {props.student && props.student.gpa || 'GPA'}
+            />
+          </div>
           <div>
             <label htmlFor="campusId">Campus</label>
             {props.student ?
@@ -72,7 +83,7 @@ const AddStudentForm = props => {
             >
               {campuses.map(campus => {
                 return (
-                  <option key={campus.id} value={campus.id}>{campus.name}</option>
+                  <option key={campus.id} value={campus.id}>&nbsp;{campus.name}</option>
                 );
               })}
             </select>
@@ -80,13 +91,16 @@ const AddStudentForm = props => {
           </div>
         </div>
         {!props.student ?
-          <div>
+          <div className="submit-button-container">
             <button type="submit">Submit</button>
+            <div className="spacer" />
+            <button onClick={closeAddStudentForm} className="cancel-btn">Cancel</button>
           </div>
           :
-          <div>
+          <div className="submit-button-container">
             <button type="submit">Save</button>
-            <button onClick={props.cancelEditing}>Cancel</button>
+            <div className="spacer" />
+            <button onClick={props.cancelEditing} className="cancel-btn">Cancel</button>
           </div>
         }
       </form>
@@ -104,13 +118,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleSubmit: (event) => {
-      console.dir(event.target);
       event.preventDefault();
       const firstName = event.target.firstName.value;
       const lastName = event.target.lastName.value;
       const email = event.target.email.value;
       const gpa = event.target.gpa.value;
       const campusId = event.target.campusId.value;
+      document.getElementById('add-student-form').reset();
       if (!ownProps.student) {
         dispatch(postStudent({
           firstName,

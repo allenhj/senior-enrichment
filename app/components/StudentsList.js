@@ -9,7 +9,7 @@ import AddStudentForm from './AddStudentForm';
 const displayAddStudentForm = () => {
   const addStudentEl = document.getElementById('add-student');
   const clickedEl = document.getElementById('add-student-clicked');
-  addStudentEl.style.height = '40vh';
+  addStudentEl.style.height = '45vh';
   window.setTimeout(() => {
     clickedEl.style.display = 'block';
   }, 250);
